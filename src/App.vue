@@ -1,18 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <BasicComponent />
+    <ol>
+      <FirstComponent
+        v-for="item in groceryList"
+        v-bind:todo="item"
+        v-bind:key="item.id"
+      />
+    </ol>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FirstComponent from "@/components/FirstComponent"
+import BasicComponent from "@/components/BasicComponent"
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    BasicComponent,
+    FirstComponent
+  },
+  data: () => ({
+    groceryList: [
+      { id: 0, text: 'Овощи' },
+      { id: 1, text: 'Сыр' },
+      { id: 2, text: 'Что там ещё люди едят?' }
+    ]
+  })
 }
 </script>
 
@@ -21,8 +36,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
