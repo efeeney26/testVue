@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>База</h1>
+        <h1>Основы</h1>
         <div>
             <h3>v-bind(атрибуты)</h3>
             <span v-bind:title="message">
@@ -42,6 +42,89 @@
             </p>
             <p>{{ answer }}</p>
         </div>
+        <div>
+            <h3>Работа с классами</h3>
+            <span
+                    class="wonder"
+                    v-bind:class="classObject"
+            >
+                Nice!!
+            </span>
+        </div>
+        <SuspendedComponent :awesome=isActive :ok=isActive />
+        <ReusableComponent :login-type=loginType :toggle-login-type=toggleLoginType />
+        <ListComponent :items=todos :object=object :even-numbers=evenNumbers :sets="sets" :even="even" />
+        <ToDoList :todos="todos" />
+        <div>
+            <h3>Обработчики событий</h3>
+            <button v-on:click="greet">Поприветствовать</button>
+            <button v-on:click="say('hi')">Скажи hi</button>
+            <button v-on:click="say('what')">Скажи what</button>
+            <button v-on:click="warn('Форма не может быть отправлена.', $event)">
+                Отправить
+            </button>
+        </div>
+        <div>
+            <h3>Работа с формами</h3>
+            <section>
+                <h4>Чекбоксы</h4>
+                <input type="checkbox" id="jack" value="Джек" v-model="checkedNames">
+                <label for="jack">Джек</label>
+                <input type="checkbox" id="john" value="Джон" v-model="checkedNames">
+                <label for="john">Джон</label>
+                <input type="checkbox" id="mike" value="Майк" v-model="checkedNames">
+                <label for="mike">Майк</label>
+                <br>
+                <span>Отмеченные имена: {{ checkedNames }}</span>
+            </section>
+            <section>
+                <h4>Радио</h4>
+                <input type="radio" id="one" value="Один" v-model="picked">
+                <label for="one">Один</label>
+                <br>
+                <input type="radio" id="two" value="Два" v-model="picked">
+                <label for="two">Два</label>
+                <br>
+                <span>Выбрано: {{ picked }}</span>
+            </section>
+            <section>
+                <h4>Выпадашки</h4>
+                <select v-model="selected">
+                    <option disabled value="">Выберите один из вариантов</option>
+                    <option>А</option>
+                    <option>Б</option>
+                    <option>В</option>
+                </select>
+                <span>Выбрано: {{ selected }}</span>
+            </section>
+            <section>
+                <h4>Выбор нескольких вариантов из списка (с привязкой к массиву)</h4>
+                <select v-model="selectedArr" multiple>
+                    <option>А</option>
+                    <option>Б</option>
+                    <option>В</option>
+                </select>
+                <br>
+                <span>Выбрано: {{ selectedArr }}</span>
+            </section>
+            <section>
+                <h4>Динамическое отображение списка опций с помощью v-for</h4>
+                <select v-model="selectedDyn">
+                    <option v-for="todo in todos" v-bind:value="todo.text" :key="todo.text">
+                        {{ todo.text }}
+                    </option>
+                </select>
+                <span>Выбрано: {{ selectedDyn }}</span>
+            </section>
+        </div>
+        <div>
+            <h3>Компоненты</h3>
+            <ButtonCounter />
+            <Posts />
+            <Alert>
+                Произошло что-то плохое
+            </Alert>
+        </div>
     </div>
 </template>
 
@@ -49,8 +132,17 @@
   import axios from 'axios'
   import { capitalize, debounce } from 'lodash'
 
+  import SuspendedComponent from '@/components/SuspendedComponent'
+  import ReusableComponent from "@/components/ReusableComponent"
+  import ListComponent from "@/components/ListComponent"
+  import ToDoList from "@/components/TodoList/ToDoList";
+  import ButtonCounter from "@/components/ButtonCounter/ButtonCounter";
+  import Posts from "@/components/Posts/Posts";
+  import Alert from "@/components/Alert/Alert";
+
   export default {
     name: "BasicComponent",
+    components: {Alert, Posts, ButtonCounter, ToDoList, ListComponent, ReusableComponent, SuspendedComponent},
     props: {},
     data() {
       return {
@@ -64,7 +156,21 @@
         message1: 'Привет, Vue.js!',
         message2: '',
         question: '',
-        answer: 'Пока вы не зададите вопрос, я не могу ответить!'
+        answer: 'Пока вы не зададите вопрос, я не могу ответить!',
+        isActive: true,
+        loginType: 'username',
+        object: {
+          title: 'How to do lists in Vue',
+          author: 'Jane Doe',
+          publishedAt: '2016-04-10'
+        },
+        numbers: [ 1, 2, 3, 4, 5 ],
+        sets: [[ 1, 2, 3, 4, 5 ], [6, 7, 8, 9, 10]],
+        checkedNames: [],
+        picked: [],
+        selected: '',
+        selectedArr: [],
+        selectedDyn: []
       }
     },
     created() {
@@ -101,11 +207,49 @@
           .catch((error) => {
             vm.answer = 'Ошибка! Не могу связаться с API. ' + error
           })
+      },
+      toggleLoginType: function () {
+        if (this.loginType === 'username') {
+          this.loginType = 'email'
+        }else {
+          this.loginType = 'username'
+        }
+      },
+      even: function (numbers) {
+        return numbers.filter(function (number) {
+          return number % 2 === 0
+        })
+      },
+      greet(e) {
+        alert('Привет, ' + this.loginType + '!')
+        if (e) {
+          alert(e.target.tagName)
+        }
+      },
+      say(mes) {
+        alert(mes)
+      },
+      warn: function (message, event) {
+        // теперь у нас есть доступ к нативному событию
+        if (event) {
+          event.preventDefault()
+        }
+        alert(message)
       }
     },
     computed: {
       reversedMessage: function () {
         return this.message1.split('').reverse().join('')
+      },
+      classObject: function () {
+        return {
+          active: this.isActive
+        }
+      },
+      evenNumbers: function () {
+        return this.numbers.filter(function (number) {
+          return number % 2 === 0
+        })
       }
     }
 }
@@ -115,5 +259,11 @@
     .container div {
         margin-bottom: 20px;
         border: 1px solid black;
+    }
+    .active {
+        color: red;
+    }
+    .wonder {
+        background-color: #42b983;
     }
 </style>
