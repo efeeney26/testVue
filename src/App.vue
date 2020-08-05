@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import BasicComponent from "@/components/BasicComponent"
+import BasicComponent from "@/containers/BasicComponent"
 
 export default {
   name: 'App',

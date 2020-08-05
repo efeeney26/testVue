@@ -132,9 +132,9 @@
   import axios from 'axios'
   import { capitalize, debounce } from 'lodash'
 
-  import SuspendedComponent from '@/components/SuspendedComponent'
-  import ReusableComponent from "@/components/ReusableComponent"
-  import ListComponent from "@/components/ListComponent"
+  import SuspendedComponent from '@/components/SuspendedComponent/SuspendedComponent'
+  import ReusableComponent from "@/components/ReusableComponent/ReusableComponent"
+  import ListComponent from "@/components/ListComponent/ListComponent"
   import ToDoList from "@/components/TodoList/ToDoList";
   import ButtonCounter from "@/components/ButtonCounter/ButtonCounter";
   import Posts from "@/components/Posts/Posts";
