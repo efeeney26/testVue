@@ -1,10 +1,12 @@
 <template>
     <div>
-        <h3>{{ post.title }}</h3>
+        <h3>{{ `${post.title} написанный ${post.author.name}` }}</h3>
         <div v-html="post.content"></div>
+        <div>{{`likes - ${post.likes}`}}</div>
         <button v-on:click="$emit('enlarge-text', '0.1')">
             Увеличить размер текста
         </button>
+        <div>{{`Кол-во комментариев - ${commentIds.length}`}}</div>
     </div>
 </template>
 
@@ -12,7 +14,11 @@
   export default {
     name: "BlogPost",
     props: {
-      post: Object
+      post: {
+        type: Object,
+        required: true
+      },
+      commentIds: Array
     }
   }
 </script>

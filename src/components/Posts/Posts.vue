@@ -6,6 +6,7 @@
                 v-bind:key="post.id"
                 v-bind:post="post"
                 v-on:enlarge-text="onEnlargeText"
+                :comment-ids="comments"
         />
     </div>
 </template>
@@ -18,11 +19,12 @@
     data() {
       return {
         posts: [
-          { id: 1, title: 'My journey with Vue', content: 'Wow1' },
-          { id: 2, title: 'Blogging with Vue', content: 'Wow2' },
-          { id: 3, title: 'Why Vue is so fun', content: 'Wow3' }
+          { id: 1, title: 'My journey with Vue', content: 'Wow1', author: { name: 'Lol'}, likes: 42 },
+          { id: 2, title: 'Blogging with Vue', content: 'Wow2', author: { name: 'Kek'}, likes: 45 },
+          { id: 3, title: 'Why Vue is so fun', content: 'Wow3' , author: { name: 'Chuck'}, likes: 0 }
         ],
-        postFontSize: 1
+        postFontSize: 1,
+        comments: [234, 266, 273]
       }
     },
     methods: {
