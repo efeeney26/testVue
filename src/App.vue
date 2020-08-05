@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <BasicComponent />
+    <p>
+      <router-link to="/basic">Базовые компоненты</router-link>
+    </p>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import BasicComponent from "@/containers/BasicComponent"
 
 export default {
-  name: 'App',
-  components: {
-    BasicComponent
-  }
+  name: 'App'
 }
 </script>
 
