@@ -1,9 +1,13 @@
 <template>
-    <input
-            type="checkbox"
-            :checked="checked"
-            @change="$emit('change', $event.target.checked)"
-    >
+    <section>
+        <label for="test">Чекбокс</label>
+        <input
+                id="test"
+                type="checkbox"
+                :checked="checked"
+                @change="$emit('change', $event.target.checked)"
+        >
+    </section>
 </template>
 
 <script>
