@@ -16,13 +16,13 @@
 </template>
 
 <script>
-  export default {
-    name: "ReusableComponent",
-    props: {
-      loginType: String,
-      toggleLoginType: Function
-    }
+export default {
+  name: 'ReusableComponent',
+  props: {
+    loginType: String,
+    toggleLoginType: Function
   }
+}
 </script>
 
 <style scoped>

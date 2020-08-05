@@ -6,19 +6,19 @@
 </template>
 
 <script>
-  export default {
-    name: "ButtonCounter",
-    data() {
-      return {
-        count: 0
-      }
-    },
-    methods: {
-      addCount() {
-        this.count++
-      }
+export default {
+  name: 'ButtonCounter',
+  data () {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    addCount () {
+      this.count++
     }
   }
+}
 </script>
 
 <style scoped>

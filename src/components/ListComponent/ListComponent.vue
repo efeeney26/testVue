@@ -29,16 +29,16 @@
 </template>
 
 <script>
-  export default {
-    name: "ListComponent",
-    props: {
-      items: Array,
-      object: Object,
-      evenNumbers: Array,
-      sets: Array,
-      even: Function
-    }
+export default {
+  name: 'ListComponent',
+  props: {
+    items: Array,
+    object: Object,
+    evenNumbers: Array,
+    sets: Array,
+    even: Function
   }
+}
 </script>
 
 <style scoped>

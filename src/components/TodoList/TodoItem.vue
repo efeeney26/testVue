@@ -6,12 +6,12 @@
 </template>
 
 <script>
-  export default {
-    name: "TodoItem",
-    props: {
-      title: String
-    }
+export default {
+  name: 'TodoItem',
+  props: {
+    title: String
   }
+}
 </script>
 
 <style scoped>

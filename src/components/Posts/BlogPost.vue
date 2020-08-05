@@ -11,16 +11,16 @@
 </template>
 
 <script>
-  export default {
-    name: "BlogPost",
-    props: {
-      post: {
-        type: Object,
-        required: true
-      },
-      commentIds: Array
-    }
+export default {
+  name: 'BlogPost',
+  props: {
+    post: {
+      type: Object,
+      required: true
+    },
+    commentIds: Array
   }
+}
 </script>
 
 <style scoped>

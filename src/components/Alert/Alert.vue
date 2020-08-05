@@ -7,9 +7,9 @@
 </template>
 
 <script>
-  export default {
-    name: "Alert"
-  }
+export default {
+  name: 'Alert'
+}
 </script>
 
 <style scoped>

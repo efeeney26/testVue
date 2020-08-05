@@ -129,129 +129,129 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import { capitalize, debounce } from 'lodash'
+import axios from 'axios'
+import { capitalize, debounce } from 'lodash'
 
-  import SuspendedComponent from '@/components/SuspendedComponent/SuspendedComponent'
-  import ReusableComponent from "@/components/ReusableComponent/ReusableComponent"
-  import ListComponent from "@/components/ListComponent/ListComponent"
-  import ToDoList from "@/components/TodoList/ToDoList";
-  import ButtonCounter from "@/components/ButtonCounter/ButtonCounter";
-  import Posts from "@/components/Posts/Posts";
-  import Alert from "@/components/Alert/Alert";
+import SuspendedComponent from '@/components/SuspendedComponent/SuspendedComponent'
+import ReusableComponent from '@/components/ReusableComponent/ReusableComponent'
+import ListComponent from '@/components/ListComponent/ListComponent'
+import ToDoList from '@/components/TodoList/ToDoList'
+import ButtonCounter from '@/components/ButtonCounter/ButtonCounter'
+import Posts from '@/components/Posts/Posts'
+import Alert from '@/components/Alert/Alert'
 
-  export default {
-    name: "BasicComponent",
-    components: {Alert, Posts, ButtonCounter, ToDoList, ListComponent, ReusableComponent, SuspendedComponent},
-    props: {},
-    data() {
-      return {
-        message: `Вы загрузили эту страницу: ${new Date().toLocaleString()}`,
-        seen: true,
-        todos: [
-          {text: 'Изучить JavaScript'},
-          {text: 'Изучить Vue'},
-          {text: 'Создать что-нибудь классное'}
-        ],
-        message1: 'Привет, Vue.js!',
-        message2: '',
-        question: '',
-        answer: 'Пока вы не зададите вопрос, я не могу ответить!',
-        isActive: true,
-        loginType: 'username',
-        object: {
-          title: 'How to do lists in Vue',
-          author: 'Jane Doe',
-          publishedAt: '2016-04-10'
-        },
-        numbers: [ 1, 2, 3, 4, 5 ],
-        sets: [[ 1, 2, 3, 4, 5 ], [6, 7, 8, 9, 10]],
-        checkedNames: [],
-        picked: [],
-        selected: '',
-        selectedArr: [],
-        selectedDyn: []
-      }
-    },
-    created() {
-      // _.debounce — это функция lodash, позволяющая ограничить то,
-      // насколько часто может выполняться определённая операция.
-      // В данном случае мы ограничиваем частоту обращений к yesno.wtf/api,
-      // дожидаясь завершения печати вопроса перед отправкой ajax-запроса.
-      // Узнать больше о функции _.debounce (и её родственнице _.throttle),
-      // можно в документации: https://lodash.com/docs#debounce
-      this.debouncedGetAnswer = debounce(this.getAnswer, 500)
-    },
-    watch: {
-      // эта функция запускается при любом изменении вопроса
-      question: function () {
-        this.answer = 'Ожидаю, когда вы закончите печатать...'
-        this.debouncedGetAnswer()
-      }
-    },
-    methods: {
-      reverseMessage: function () {
-        this.message1 = this.message1.split('').reverse().join('')
+export default {
+  name: 'BasicComponent',
+  components: { Alert, Posts, ButtonCounter, ToDoList, ListComponent, ReusableComponent, SuspendedComponent },
+  props: {},
+  data () {
+    return {
+      message: `Вы загрузили эту страницу: ${new Date().toLocaleString()}`,
+      seen: true,
+      todos: [
+        { text: 'Изучить JavaScript' },
+        { text: 'Изучить Vue' },
+        { text: 'Создать что-нибудь классное' }
+      ],
+      message1: 'Привет, Vue.js!',
+      message2: '',
+      question: '',
+      answer: 'Пока вы не зададите вопрос, я не могу ответить!',
+      isActive: true,
+      loginType: 'username',
+      object: {
+        title: 'How to do lists in Vue',
+        author: 'Jane Doe',
+        publishedAt: '2016-04-10'
       },
-      getAnswer: function () {
-        if (this.question.indexOf('?') === -1) {
-          this.answer = 'Вопросы обычно заканчиваются вопросительным знаком. ;-)'
-          return
-        }
-        this.answer = 'Думаю...'
-        const vm = this
-        axios.get('https://yesno.wtf/api')
-          .then((response) => {
-            vm.answer = capitalize(response.data.answer)
-          })
-          .catch((error) => {
-            vm.answer = 'Ошибка! Не могу связаться с API. ' + error
-          })
-      },
-      toggleLoginType: function () {
-        if (this.loginType === 'username') {
-          this.loginType = 'email'
-        }else {
-          this.loginType = 'username'
-        }
-      },
-      even: function (numbers) {
-        return numbers.filter(function (number) {
-          return number % 2 === 0
-        })
-      },
-      greet(e) {
-        alert('Привет, ' + this.loginType + '!')
-        if (e) {
-          alert(e.target.tagName)
-        }
-      },
-      say(mes) {
-        alert(mes)
-      },
-      warn: function (message, event) {
-        // теперь у нас есть доступ к нативному событию
-        if (event) {
-          event.preventDefault()
-        }
-        alert(message)
-      }
-    },
-    computed: {
-      reversedMessage: function () {
-        return this.message1.split('').reverse().join('')
-      },
-      classObject: function () {
-        return {
-          active: this.isActive
-        }
-      },
-      evenNumbers: function () {
-        return this.numbers.filter(function (number) {
-          return number % 2 === 0
-        })
-      }
+      numbers: [1, 2, 3, 4, 5],
+      sets: [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]],
+      checkedNames: [],
+      picked: [],
+      selected: '',
+      selectedArr: [],
+      selectedDyn: []
     }
+  },
+  created () {
+    // _.debounce — это функция lodash, позволяющая ограничить то,
+    // насколько часто может выполняться определённая операция.
+    // В данном случае мы ограничиваем частоту обращений к yesno.wtf/api,
+    // дожидаясь завершения печати вопроса перед отправкой ajax-запроса.
+    // Узнать больше о функции _.debounce (и её родственнице _.throttle),
+    // можно в документации: https://lodash.com/docs#debounce
+    this.debouncedGetAnswer = debounce(this.getAnswer, 500)
+  },
+  watch: {
+    // эта функция запускается при любом изменении вопроса
+    question: function () {
+      this.answer = 'Ожидаю, когда вы закончите печатать...'
+      this.debouncedGetAnswer()
+    }
+  },
+  methods: {
+    reverseMessage: function () {
+      this.message1 = this.message1.split('').reverse().join('')
+    },
+    getAnswer: function () {
+      if (this.question.indexOf('?') === -1) {
+        this.answer = 'Вопросы обычно заканчиваются вопросительным знаком. ;-)'
+        return
+      }
+      this.answer = 'Думаю...'
+      const vm = this
+      axios.get('https://yesno.wtf/api')
+        .then((response) => {
+          vm.answer = capitalize(response.data.answer)
+        })
+        .catch((error) => {
+          vm.answer = 'Ошибка! Не могу связаться с API. ' + error
+        })
+    },
+    toggleLoginType: function () {
+      if (this.loginType === 'username') {
+        this.loginType = 'email'
+      } else {
+        this.loginType = 'username'
+      }
+    },
+    even: function (numbers) {
+      return numbers.filter(function (number) {
+        return number % 2 === 0
+      })
+    },
+    greet (e) {
+      alert('Привет, ' + this.loginType + '!')
+      if (e) {
+        alert(e.target.tagName)
+      }
+    },
+    say (mes) {
+      alert(mes)
+    },
+    warn: function (message, event) {
+      // теперь у нас есть доступ к нативному событию
+      if (event) {
+        event.preventDefault()
+      }
+      alert(message)
+    }
+  },
+  computed: {
+    reversedMessage: function () {
+      return this.message1.split('').reverse().join('')
+    },
+    classObject: function () {
+      return {
+        active: this.isActive
+      }
+    },
+    evenNumbers: function () {
+      return this.numbers.filter(function (number) {
+        return number % 2 === 0
+      })
+    }
+  }
 }
 </script>
 

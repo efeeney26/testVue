@@ -23,27 +23,27 @@
 </template>
 
 <script>
-  import TodoItem from "@/components/TodoList/TodoItem"
+import TodoItem from '@/components/TodoList/TodoItem'
 
-  export default {
-    name: "ToDoComponent",
-    components: {TodoItem},
-    data() {
-      return {
-        newTodoText: ''
-      }
-    },
-    methods: {
-      addNewTodo() {
-        this.todos.push({
-          text: this.newTodoText
-        })
-      }
-    },
-    props: {
-      todos: Array
+export default {
+  name: 'ToDoComponent',
+  components: { TodoItem },
+  data () {
+    return {
+      newTodoText: ''
     }
+  },
+  methods: {
+    addNewTodo () {
+      this.todos.push({
+        text: this.newTodoText
+      })
+    }
+  },
+  props: {
+    todos: Array
   }
+}
 </script>
 
 <style scoped>

@@ -8,13 +8,13 @@
 </template>
 
 <script>
-  export default {
-    name: "SuspendedComponent",
-    props: {
-      awesome: Boolean,
-      ok: Boolean
-    }
+export default {
+  name: 'SuspendedComponent',
+  props: {
+    awesome: Boolean,
+    ok: Boolean
   }
+}
 </script>
 
 <style scoped>
