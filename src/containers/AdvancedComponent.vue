@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: "AdvancedComponent"
-  }
+export default {
+  name: 'AdvancedComponent'
+}
 </script>
 
 <style scoped>

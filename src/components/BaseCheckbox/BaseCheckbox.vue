@@ -7,16 +7,16 @@
 </template>
 
 <script>
-  export default {
-    name: "BaseCheckbox",
-    props: {
-      checked: Boolean
-    },
-    model: {
-      prop: 'checked',
-      event: 'change'
-    }
+export default {
+  name: 'BaseCheckbox',
+  props: {
+    checked: Boolean
+  },
+  model: {
+    prop: 'checked',
+    event: 'change'
   }
+}
 </script>
 
 <style scoped>
